@@ -19,7 +19,12 @@ import { Post } from 'src/models/post';
 
 export default defineComponent({
   name: 'PostCard',
-  props: ['item'],
+  props: {
+    item: {
+      type: Object,
+      required: true,
+    },
+  },
   emits: ['delete'],
   computed: {
     text() {
