@@ -44,36 +44,34 @@
 <script lang="ts">
 import { Post } from 'src/models/post';
 import postsService from 'src/service/posts-service';
-import { defineComponent, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'NewPost',
   data() {
-    const $router = useRouter();
-
-    const title = ref('');
-    const text = ref('');
-
     return {
-      title,
-      text,
-
-      onSubmit() {
-        postsService
-          .createPost({
-            title: title.value,
-            text: text.value,
-          })
-          .then((res: { data: Post }) => $router.push(`/posts/${res.data.id}`))
-          .catch((err) => console.log(err));
-      },
-
-      onReset() {
-        title.value = '';
-        text.value = '';
-      },
+      title: '',
+      text: '',
     };
+  },
+
+  methods: {
+    onSubmit() {
+      postsService
+        .createPost({
+          title: this.title,
+          text: this.title,
+        })
+        .then((res: { data: Post }) =>
+          this.$router.push(`/posts/${res.data.id}`)
+        )
+        .catch((err) => console.log(err));
+    },
+
+    onReset() {
+      this.title = '';
+      this.text = '';
+    },
   },
 });
 </script>
